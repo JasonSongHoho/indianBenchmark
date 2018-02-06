@@ -6,4 +6,5 @@ developer.properties
 .settings
 .classpath
 readerme.txt
-/jmeter
+/config
+/null
