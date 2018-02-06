@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level [%-20thread] [%-30logger{30}] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logs.dir}/testing-app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${logs.dir}/testing-app.%i.log</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>10</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>10MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{yy-MM-dd HH:mm:ss.SSS} %-5level [%-20thread] [%-30logger{30}] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root>
+        <level value="ERROR"/>
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="file"/>
+    </root>
+
+    <!-- 默认配置第三方 -->
+    <logger name="com.alibaba.dubbo" level="ERROR"/>
+    <logger name="uyun.whale.common" level="ERROR"/>
+
+    <!-- 默认配置产品 -->
+    <logger name="uyun" level="ERROR"/>
+    <logger name="uyun.indian.tester.report" level="INFO"/>
+    <logger name="uyun.indian.tester.service" level="ERROR"/>
+
+    <!-- 自定义配置 -->
+</configuration>

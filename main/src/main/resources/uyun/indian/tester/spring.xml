@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+
+    <dubbo:application name="indian-benchmarks"/>
+    <dubbo:registry address="${zk.url}"/>
+
+    <dubbo:registry id="platform.registry" address="${zk.url}"/>
+
+    <dubbo:reference id="indianWriterService" interface="uyun.indian.writer.api.WriterService" check="false"
+                     retries="0" timeout="${write.timeout}"/>
+    <dubbo:reference id="indianReaderService" interface="uyun.indian.reader.api.ReaderService" check="false"
+                     retries="0" timeout="${reader.timeout}"/>
+
+
+</beans>
